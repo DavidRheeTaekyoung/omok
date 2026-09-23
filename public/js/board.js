@@ -14,11 +14,15 @@
     this.resize();
   }
 
+  /* 남은 공간을 실제로 재서 정사각으로 꽉 채운다 */
   Board.prototype.resize = function () {
-    const r = this.cv.getBoundingClientRect();
+    const box = this.cv.parentElement;
+    const r = box.getBoundingClientRect();
+    const s = Math.max(160, Math.min(r.width, r.height, Board.MAX));
+    this.cv.style.width = s + 'px';
+    this.cv.style.height = s + 'px';
     this.dpr = Math.min(2, g.devicePixelRatio || 1);
-    const s = Math.max(1, Math.min(r.width, r.height));
-    this.cv.width = s * this.dpr; this.cv.height = s * this.dpr;
+    this.cv.width = Math.round(s * this.dpr); this.cv.height = Math.round(s * this.dpr);
     this.size = s;
     this.pad = s * 0.07;
     this.cell = (s - this.pad * 2) / (SIZE - 1);
@@ -221,5 +225,6 @@
     this.winLine = line; this.winT = performance.now(); this.kick();
   };
 
+  Board.MAX = 760;
   g.BoardView = Board;
 })(window);

@@ -177,12 +177,12 @@ button { font-family: inherit; cursor: pointer; border: none; }
 #boardWrap {
   position: relative; width: 100%; flex: 1 1 auto; min-height: 0;
   display: flex; align-items: center; justify-content: center;
-  max-width: min(560px, 100vw);
+  max-width: min(760px, 100vw);
 }
+/* 크기는 js 가 남은 공간을 재서 정한다 */
 #board {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
-  width: min(100%, calc(100vh - 250px)); height: auto; aspect-ratio: 1;
-  max-width: 540px; touch-action: manipulation;
+  touch-action: manipulation;
 }
 #fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 15; }
 #game.waiting #board { cursor: progress; }
@@ -244,4 +244,22 @@ button { font-family: inherit; cursor: pointer; border: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sky, .chr-body, .logo span, .logo em { animation: none; }
+}
+
+/* 가로로 넓은 화면 — 판은 높이를 다 쓰고, 나머지는 옆단으로 */
+@media (min-width: 760px) and (min-aspect-ratio: 11/10) {
+  #game.on {
+    display: grid; gap: 8px 14px; padding: 10px 14px;
+    grid-template-columns: 1fr minmax(230px, 300px);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "board top" "board opp" "board me";
+    align-content: stretch;
+  }
+  .bar-top   { grid-area: top; max-width: none; padding: 0; }
+  .player.opp{ grid-area: opp; align-self: start; max-width: none; padding: 0; }
+  .player.me { grid-area: me;  align-self: end;   max-width: none; padding: 0 0 4px; flex-wrap: wrap; }
+  #boardWrap { grid-area: board; max-width: none; height: 100%; }
+  .chr-box.sm { width: 84px; flex-basis: 84px; }
+  .bubble { font-size: 15px; }
+  .tools { width: 100%; justify-content: flex-end; }
 }

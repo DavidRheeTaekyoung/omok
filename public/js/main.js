@@ -343,6 +343,7 @@
     $('#optTwoTap').checked = !!St.s.twoTap;
 
     addEventListener('resize', () => { view.resize(); FX.resize(); });
+    if (window.ResizeObserver) new ResizeObserver(() => { view.resize(); FX.resize(); }).observe($('#boardWrap'));
 
     document.addEventListener('click', (e) => {
       const b = e.target.closest('[data-go],[data-act]');
