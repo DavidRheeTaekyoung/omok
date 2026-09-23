@@ -3,7 +3,7 @@
   'use strict';
   const KEY = 'ddalgi-omok-v1';
   const DEF = {
-    sound: true, forbidMark: true, twoTap: null, lastLevel: 'easy', lastFirst: 'me',
+    sound: true, forbidMark: true, twoTap: false, v2: false, lastLevel: 'easy', lastFirst: 'me',
     win: 0, lose: 0, draw: 0, streak: 0, bestStreak: 0, stickers: {},
   };
   let s = Object.assign({}, DEF);

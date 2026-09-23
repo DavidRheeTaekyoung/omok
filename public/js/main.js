@@ -38,7 +38,11 @@
   /* ---------- 화면 ---------- */
   function show(id) {
     $$('.screen').forEach((s) => s.classList.toggle('on', s.id === id));
-    if (id === 'game') requestAnimationFrame(() => { view.resize(); FX.resize(); });
+    /* rAF 가 멈춰 있을 수도 있으니(백그라운드 탭) 먼저 한 번 재고, 다음 프레임에 한 번 더 */
+    if (id === 'game') {
+      view.resize(); FX.resize();
+      requestAnimationFrame(() => { view.resize(); FX.resize(); });
+    }
     if (id === 'home') paintHome();
     if (id === 'book') paintBook();
   }
@@ -335,7 +339,8 @@
     initWorker();
     bindBoard();
 
-    if (St.s.twoTap === null) St.set('twoTap', matchMedia('(pointer: coarse)').matches);
+    /* 한 번 누르면 놓인다. 실수는 무르기로 되돌린다 */
+    if (!St.s.v2) { St.set('twoTap', false); St.set('v2', true); }
     SFX.set(St.s.sound);
     $('#soundBtn').classList.toggle('off', !St.s.sound);
     $('#optSound').checked = St.s.sound;
