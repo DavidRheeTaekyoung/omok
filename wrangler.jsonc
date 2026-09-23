@@ -1,0 +1,6 @@
+{
+  "name": "omok",
+  "compatibility_date": "2026-09-01",
+  "assets": { "directory": "./public" },
+  "routes": [{ "pattern": "omok.busangames.com", "custom_domain": true }]
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#ffd9ea">
+<title>딸기오목 🍓</title>
+<meta name="description" content="핑크핑크 귀여운 오목! 컴퓨터랑 겨루거나 친구랑 둘이서. 렌주룰, 금수 표시, 힌트, 스티커 모으기.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text y='52' font-size='52'>🍓</text></svg>">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="loading">
+
+<div class="sky"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<!-- 홈 -->
+<section id="home" class="screen on">
+  <div class="home-wrap">
+    <h1 class="logo"><span>딸</span><span>기</span><span>오</span><span>목</span><em>🍓</em></h1>
+    <p class="tag">다섯 개를 먼저 이어 봐!</p>
+
+    <div class="rankcard">
+      <div class="rank-top">
+        <div id="rankIcon" class="rank-ico">🌱</div>
+        <div class="rank-txt">
+          <b id="rankName">새싹</b>
+          <small id="homeStat">0승 0패</small>
+        </div>
+      </div>
+      <div class="bar"><i id="rankBar"></i></div>
+      <small id="rankNext" class="nx">다음 등급까지</small>
+    </div>
+
+    <div class="chars-row">
+      <div id="homeBerry" class="chr-box"></div>
+      <div class="vs">VS</div>
+      <div id="homeBlue" class="chr-box"></div>
+    </div>
+
+    <div class="menu">
+      <button class="big pink" data-act="ai"><b>혼자 놀기</b><small>컴퓨터랑 대결</small></button>
+      <button class="big purple" data-act="local"><b>둘이서</b><small>한 화면에서 번갈아</small></button>
+      <div class="row2">
+        <button class="mini" data-go="book">🎀 스티커</button>
+        <button class="mini" data-go="howto">❓ 규칙</button>
+        <button class="mini" data-act="settings">⚙️ 설정</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 난이도 -->
+<section id="setup" class="screen">
+  <div class="panel">
+    <h2>누구랑 놀까?</h2>
+    <div class="picks">
+      <button class="lv sel" data-lv="easy"><em>🍼</em><b>쉬움</b><small>아기 블루베리</small></button>
+      <button class="lv" data-lv="normal"><em>🌸</em><b>보통</b><small>블루베리</small></button>
+      <button class="lv" data-lv="hard"><em>👑</em><b>어려움</b><small>블루베리 대장</small></button>
+    </div>
+    <h2>누가 먼저 둘까?</h2>
+    <div class="picks two">
+      <button class="fs sel" data-first="me"><em>🍓</em><b>내가 먼저</b><small>딸기 · 금수 있음</small></button>
+      <button class="fs" data-first="you"><em>🫐</em><b>컴퓨터 먼저</b><small>나는 블루베리</small></button>
+    </div>
+    <div class="row2">
+      <button class="mini" data-go="home">← 뒤로</button>
+      <button class="big pink go" data-act="go">시작!</button>
+    </div>
+  </div>
+</section>
+
+<!-- 게임 -->
+<section id="game" class="screen">
+  <header class="bar-top">
+    <button class="icon" data-go="home">🏠</button>
+    <div id="turnChip" class="chip"></div>
+    <button class="icon" id="soundBtn" data-act="sound">🔊</button>
+  </header>
+
+  <div class="player opp">
+    <div id="aiChar" class="chr-box sm"></div>
+    <div class="pinfo"><b id="aiName">블루베리</b><div id="aiBubble" class="bubble"></div></div>
+  </div>
+
+  <div id="boardWrap">
+    <canvas id="board"></canvas>
+    <canvas id="fx"></canvas>
+  </div>
+
+  <div class="player me">
+    <div id="meChar" class="chr-box sm"></div>
+    <div class="pinfo"><b id="meName">나</b><div id="meBubble" class="bubble"></div></div>
+    <div class="tools">
+      <button class="tool" id="undoBtn" data-act="undo">↩️<span>무르기</span></button>
+      <button class="tool" id="hintBtn" data-act="hint">💡<span>힌트</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 스티커 -->
+<section id="book" class="screen">
+  <div class="panel">
+    <h2>🎀 스티커 도감</h2>
+    <p id="bookStat" class="nx"></p>
+    <div id="stickerGrid" class="grid"></div>
+    <button class="big pink" data-go="home">돌아가기</button>
+  </div>
+</section>
+
+<!-- 규칙 -->
+<section id="howto" class="screen">
+  <div class="panel">
+    <h2>❓ 어떻게 하나요</h2>
+    <ul class="rules">
+      <li><b>🍓 딸기가 먼저</b> 두고, 번갈아 가며 한 알씩 놓아요.</li>
+      <li>가로·세로·대각선으로 <b>똑같은 색 5개</b>를 먼저 이으면 이겨요!</li>
+      <li>딸기(먼저 두는 쪽)는 너무 유리해서 <b>세 가지 반칙</b>이 있어요 — 이걸 <b>렌주룰</b>이라고 해요.
+        <div class="rulebox">
+          <span><b>삼삼</b> 열린 3목을 한 번에 두 개</span>
+          <span><b>사사</b> 4목을 한 번에 두 개</span>
+          <span><b>장목</b> 6개 이상 한 줄로</span>
+        </div>
+      </li>
+      <li>반칙 자리는 판에 <b style="color:#e24868">✕</b> 로 표시돼요. 거긴 못 놓아요!</li>
+      <li>🫐 블루베리는 반칙이 없고, 6개 이상 이어도 이겨요.</li>
+      <li>막히면 <b>💡 힌트</b>, 실수하면 <b>↩️ 무르기</b>를 눌러요.</li>
+    </ul>
+    <button class="big pink" data-go="home">알겠어요!</button>
+  </div>
+</section>
+
+<!-- 결과 -->
+<div id="result" class="modal">
+  <div class="mbox">
+    <h2 id="rTitle">이겼다!</h2>
+    <p id="rSub"></p>
+    <div id="rReward"></div>
+    <div class="row2">
+      <button class="big purple" data-act="home">나가기</button>
+      <button class="big pink" data-act="again">한 판 더!</button>
+    </div>
+  </div>
+</div>
+
+<!-- 설정 -->
+<div id="settings" class="modal">
+  <div class="mbox">
+    <h2>⚙️ 설정</h2>
+    <label class="opt"><input type="checkbox" id="optSound"><span>소리 켜기</span></label>
+    <label class="opt"><input type="checkbox" id="optForbid"><span>금수 자리 ✕ 표시</span></label>
+    <label class="opt"><input type="checkbox" id="optTwoTap"><span>두 번 눌러서 놓기 <small>(잘못 누르기 방지)</small></span></label>
+    <button class="mini danger" data-act="reset">기록 전부 지우기</button>
+    <button class="big pink" data-act="closeSet">닫기</button>
+  </div>
+</div>
+
+<script src="js/rules.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/store.js"></script>
+<script src="js/sfx.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/chars.js"></script>
+<script src="js/board.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
